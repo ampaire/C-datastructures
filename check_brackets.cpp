@@ -38,13 +38,16 @@ int main() {
 
         if (next == ')' || next == ']' || next == '}') {
             // Process closing bracket, write your code here
-            Bracket top = opening_brackets_stack.top();
-            if(opening_brackets_stack.empty() ||!top.Matchc(next)){
-                error_at = position +1;
+            if (opening_brackets_stack.size() == 0) {
+                error_at = position + 1;
+                break;
+            } else if (opening_brackets_stack.top().Matchc(next)) {
+                // pop it
+                opening_brackets_stack.pop();
+            } else {
+                error_at = position + 1;
                 break;
             }
-
-			opening_brackets_stack.pop();
         }
     }
 
